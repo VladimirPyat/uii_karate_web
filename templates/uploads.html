@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <title>Загрузка</title>
+    </head>
+    <body>
+        <h2>Загрузите ваше видео:</h2>
+
+        {% if file_path %}
+            <!-- Если file_path не пустой, отображаем форму обработки видео -->
+            <form action="/process-video/" method="get">
+                <!-- передаем путь к обрабатываемому файлу -->
+                <input type="hidden" name="file_path" value="{{ file_path }}">
+                <!-- выбираем ката. по умолчанию первая в списке -->
+                <label for="kata_name">Выберите ката:</label>
+                <select name="kata_name" id="kata_name">
+                    {% for option in selector %}
+                        <option value="{{ option }}">{{ option }}</option>
+                    {% endfor %}
+                </select>
+                <!-- кнопка отправки формы -->
+                <button type="submit">Обработка видео</button>
+            </form>
+        {% else %}
+            <!-- Если file_path пустой, отображаем форму загрузки -->
+            <form action="/upload-video/" method="post" enctype="multipart/form-data">
+                <input type="file" name="file" accept="video/*" required>
+                <button type="submit">Загрузить</button>
+            </form>
+        {% endif %}
+
+        <p>{{ message }}</p>
+    </body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Обработка</title>
+</head>
+<body>
+    <h2>Результаты обработки видео {{ kata_name }}:</h2>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Имя</th>
+                <th>Фото</th>
+                <th>Видео</th>
+                <th>Завершено</th>
+                <th>Оценка</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for result in kata_results %}
+                <tr>
+                    <td>{{ result.id }}</td>
+                    <td>{{ result.name }}</td>
+                    <td>
+                        {% if result.photo %}
+                            <img src="{{ result.photo }}" alt="{{ result.name }}" style="width: 50px; height: 50px;">
+                        {% else %}
+                            Нет фото
+                        {% endif %}
+                    </td>
+                    <td>{{ result.video if result.video else 'Нет видео' }}</td>
+                    <td>{{ 'Да' if result.completed else 'Нет' }}</td>
+                    <td>{{ result.score }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="/">Вернуться </a>
+
+</body>
+</html>
