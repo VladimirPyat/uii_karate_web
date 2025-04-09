@@ -47,7 +47,6 @@ async def upload_video(request: Request, file: UploadFile = File(...)):
     if not file_reader.is_allowed_file(file.filename):
         return view.upload_page(request, content={"message": "Формат файла не поддерживается", },
                                 status_code=400)
-
     try:
         await file_reader.upload_file(UPLOAD_DIRECTORY, file)
         # Возвращаем ссылку на загруженное видео
